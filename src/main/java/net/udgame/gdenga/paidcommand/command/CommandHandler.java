@@ -118,11 +118,11 @@ public class CommandHandler implements CommandExecutor {
                 }
                 List<String> playerList = Paid.getIgnorePlayer(stringBuilder.toString());
                 sender.sendMessage("[PaidCommand] > §5§a以下玩家可免费使用付费指令 §e"+stringBuilder.toString().replaceAll("-"," "));
-                sender.sendMessage("[PaidCommand] > §9---------------------------------------------");
+                sender.sendMessage("[PaidCommand] > §9----------------------------------------------");
                 for (String playerName : playerList){
                     sender.sendMessage("[PaidCommand] > §e    "+playerName);
                 }
-                sender.sendMessage("[PaidCommand] > §9---------------------------------------------");
+                sender.sendMessage("[PaidCommand] > §9----------------------------------------------");
                 return true;
             }
             sendHelp(sender);
