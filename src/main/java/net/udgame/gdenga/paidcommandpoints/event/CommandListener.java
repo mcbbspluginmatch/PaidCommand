@@ -1,9 +1,9 @@
-package net.udgame.gdenga.paidcommand.event;
+package net.udgame.gdenga.paidcommandpoints.event;
 
-import net.udgame.gdenga.paidcommand.PaidCommand;
-import net.udgame.gdenga.paidcommand.setting.Language;
-import net.udgame.gdenga.paidcommand.setting.Paid;
-import net.udgame.gdenga.paidcommand.util.VaultHandle;
+import net.udgame.gdenga.paidcommandpoints.PaidCommandPoints;
+import net.udgame.gdenga.paidcommandpoints.setting.Language;
+import net.udgame.gdenga.paidcommandpoints.setting.Paid;
+import net.udgame.gdenga.paidcommandpoints.util.PlayerPoints;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +15,7 @@ import java.util.List;
 public class CommandListener implements Listener {
     @EventHandler
     public void commandListen(PlayerCommandPreprocessEvent event){
-        if (!PaidCommand.getInstance().getConfig().getBoolean("PaidCommand.Paid_Enable")){
+        if (!PaidCommandPoints.getInstance().getConfig().getBoolean("PaidCommandPoints.Paid_Enable")){
             if (event.isCancelled()){
                 event.setCancelled(false);
                 return;
@@ -24,7 +24,7 @@ public class CommandListener implements Listener {
         }
         Player player = event.getPlayer();
         String command = event.getMessage();
-        if (player.hasPermission("pc.free")){
+        if (player.hasPermission("pcp.free")){
             if (event.isCancelled()){
                 event.setCancelled(false);
                 return;
@@ -74,17 +74,16 @@ public class CommandListener implements Listener {
             event.setCancelled(false);
             return;
         }
-        VaultHandle vaultHandle = new VaultHandle();
-        int hasMoney = vaultHandle.getMoney(player.getName());
+        PlayerPoints playerPoints = new PlayerPoints();
+        int hasPoints = playerPoints.getMoney(player.getName());
         String message = "";
-        if (!vaultHandle.hasMoney(player.getName(),cost)){
-            message = Language.getNotEnough().replaceAll("\\$\\{MONEY\\}",String.valueOf(cost)).replaceAll("\\$\\{NOW\\}",String.valueOf(vaultHandle.getMoney(player.getName())));
+        if (!playerPoints.payPoints(player.getName(),cost)){
+            message = Language.getNotEnough().replaceAll("\\$\\{POINTS\\}",String.valueOf(cost)).replaceAll("\\$\\{NOW\\}",String.valueOf(hasPoints));
             player.sendMessage(message);
             event.setCancelled(true);
             return;
         }
-        vaultHandle.delMoney(player.getName(),cost);
-        message = Language.getSuccess().replaceAll("\\$\\{MONEY\\}",String.valueOf(cost)).replaceAll("\\$\\{NOW\\}",String.valueOf(vaultHandle.getMoney(player.getName())));
+        message = Language.getSuccess().replaceAll("\\$\\{POINTS\\}",String.valueOf(cost)).replaceAll("\\$\\{NOW\\}",String.valueOf(playerPoints.getMoney(player.getName())));
         player.sendMessage(message);
         event.setCancelled(false);
         return;

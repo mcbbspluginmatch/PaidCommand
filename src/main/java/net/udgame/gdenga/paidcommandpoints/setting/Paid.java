@@ -1,7 +1,6 @@
-package net.udgame.gdenga.paidcommand.setting;
+package net.udgame.gdenga.paidcommandpoints.setting;
 
-import net.udgame.gdenga.paidcommand.PaidCommand;
-import org.bukkit.Material;
+import net.udgame.gdenga.paidcommandpoints.PaidCommandPoints;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -17,7 +16,7 @@ import java.util.*;
  */
 public class Paid {
     public static FileConfiguration openPaidYml() {
-        File paidFile = new File(PaidCommand.getInstance().getDataFolder() + "//paid.yml");
+        File paidFile = new File(PaidCommandPoints.getInstance().getDataFolder() + "//paid.yml");
         FileConfiguration filec = YamlConfiguration.loadConfiguration(paidFile);
         return filec;
     }
@@ -49,19 +48,19 @@ public class Paid {
     }
 
     public static void addPaidCommand(String commandName,Integer cost){
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(new File(PaidCommand.getInstance().getDataFolder() + "//paid.yml"));
+        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(new File(PaidCommandPoints.getInstance().getDataFolder() + "//paid.yml"));
         ConfigurationSection commandSection = yamlConfiguration.getConfigurationSection("Paid.Command");
         commandSection.set(commandName+".cost",cost);
         commandSection.set(commandName+".ignore_player",new ArrayList<String>());
         try {
-            yamlConfiguration.save(PaidCommand.getInstance().getDataFolder() + "//paid.yml");
+            yamlConfiguration.save(PaidCommandPoints.getInstance().getDataFolder() + "//paid.yml");
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
     public static void addCommandIgnorePlayer(String commandName,String playerName){
-        File paidFile = new File(PaidCommand.getInstance().getDataFolder() + "//paid.yml");
+        File paidFile = new File(PaidCommandPoints.getInstance().getDataFolder() + "//paid.yml");
         FileConfiguration filec = YamlConfiguration.loadConfiguration(paidFile);
         List<String> ignorePlayer =getIgnorePlayer(commandName);
         ignorePlayer.add(playerName);
@@ -74,7 +73,7 @@ public class Paid {
     }
 
     public static Boolean delPaidCommand(String command){
-        File paidFile = new File(PaidCommand.getInstance().getDataFolder() + "//paid.yml");
+        File paidFile = new File(PaidCommandPoints.getInstance().getDataFolder() + "//paid.yml");
         FileConfiguration filec = YamlConfiguration.loadConfiguration(paidFile);
         if (!getPaidCommandList().contains(command)){
             return false;
@@ -89,7 +88,7 @@ public class Paid {
     }
 
     public static Boolean delPaidCommandIgnorePlayer(String command,String player){
-        File paidFile = new File(PaidCommand.getInstance().getDataFolder() + "//paid.yml");
+        File paidFile = new File(PaidCommandPoints.getInstance().getDataFolder() + "//paid.yml");
         FileConfiguration filec = YamlConfiguration.loadConfiguration(paidFile);
         if (!getPaidCommandList().contains(command)){
             return false;

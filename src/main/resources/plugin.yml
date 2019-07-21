@@ -1,18 +1,18 @@
-name: PaidCommand
+name: PaidCommandPoints
 version: 1.0.0
-main: net.udgame.gdenga.paidcommand.PaidCommand
+main: net.udgame.gdenga.paidcommandpoints.PaidCommandPoints
 api-version: 1.13
-depend: [Vault]
+depend: [PlayerPoints]
 authors: [gdenga]
-description: 付费指令
+description: 付费指令-点券版
 website: www.gdenga.top
 commands:
-  pc:
-    usage: /pc help
+  pcp:
+    usage: /pcp help
 permissions:
-  pc.admin:
+  pcp.admin:
     description: 付费指令操作权限
     default: op
-  pc.free:
+  pcp.free:
     description: 免费全部付费指令权限
     default: op

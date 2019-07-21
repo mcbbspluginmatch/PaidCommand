@@ -1,11 +1,10 @@
-package net.udgame.gdenga.paidcommand.setting;
+package net.udgame.gdenga.paidcommandpoints.setting;
 
-import net.udgame.gdenga.paidcommand.PaidCommand;
+import net.udgame.gdenga.paidcommandpoints.PaidCommandPoints;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * @author: gdenga
@@ -14,7 +13,7 @@ import java.util.List;
  */
 public class Language {
     public static FileConfiguration openLanguageYml() {
-        File regionFile = new File(PaidCommand.getInstance().getDataFolder() + "//language.yml");
+        File regionFile = new File(PaidCommandPoints.getInstance().getDataFolder() + "//language.yml");
         FileConfiguration filec = YamlConfiguration.loadConfiguration(regionFile);
         return filec;
     }
