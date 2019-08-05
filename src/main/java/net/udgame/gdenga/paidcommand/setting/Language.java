@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Language {
     public static FileConfiguration openLanguageYml() {
+        // new File(PaidCommand.getInstance().getDataFolder(), "language.yml") —— 754503921
         File regionFile = new File(PaidCommand.getInstance().getDataFolder() + "//language.yml");
         FileConfiguration filec = YamlConfiguration.loadConfiguration(regionFile);
         return filec;

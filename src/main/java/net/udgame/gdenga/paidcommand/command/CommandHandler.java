@@ -37,7 +37,7 @@ public class CommandHandler implements CommandExecutor {
                     return true;
                 }
                 String playerName = args[2];
-
+                // 这段代码出现多次 —— 754503921
                 StringBuilder stringBuilder = new StringBuilder();
                 for (int i = 3; i < args.length; i++) {
                     if (i == args.length - 1) {
@@ -63,8 +63,8 @@ public class CommandHandler implements CommandExecutor {
                     sender.sendMessage("[PaidCommand] > §c格式错误 /xp add paid [Cost] [Command]");
                     return true;
                 }
-                int cost = Integer.valueOf(args[2]);
-                StringBuilder stringBuilder = new StringBuilder();
+                int cost = Integer.valueOf(args[2]); // 未进行异常处理 —— 754503921
+                StringBuilder stringBuilder = new StringBuilder(); // String.join —— 754503921
                 for (int i = 3; i < args.length; i++) {
                     if (i == args.length - 1) {
                         stringBuilder.append(args[i]);

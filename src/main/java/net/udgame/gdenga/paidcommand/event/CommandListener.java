@@ -18,7 +18,7 @@ public class CommandListener implements Listener {
         if (!PaidCommand.getInstance().getConfig().getBoolean("PaidCommand.Paid_Enable")){
             if (event.isCancelled()){
                 event.setCancelled(false);
-                return;
+                return; // 这个 return 有什么用 —— 754503921
             }
             return;
         }
@@ -34,7 +34,7 @@ public class CommandListener implements Listener {
         //-----------------------------------------------------------------------
         command = command.replace("/","");
         command = command.trim();
-        int commandNum = command.indexOf(" ");
+        int commandNum = command.indexOf(" ");  // 这个变量有什么用 —— 754503921
         String[] commands = command.split(" ");
         int cost = 0;
         List<String> ignorePlayer = new ArrayList<>();
@@ -75,9 +75,9 @@ public class CommandListener implements Listener {
             return;
         }
         VaultHandle vaultHandle = new VaultHandle();
-        int hasMoney = vaultHandle.getMoney(player.getName());
+        int hasMoney = vaultHandle.getMoney(player.getName()); // 这个变量为什么不用 —— 754503921
         String message = "";
-        if (!vaultHandle.hasMoney(player.getName(),cost)){
+        if (!vaultHandle.hasMoney(player.getName(),cost)){ // 应直接判断扣钱操作成功与否，而不是判断金钱数量是否大于某个值 —— 754503921
             message = Language.getNotEnough().replaceAll("\\$\\{MONEY\\}",String.valueOf(cost)).replaceAll("\\$\\{NOW\\}",String.valueOf(vaultHandle.getMoney(player.getName())));
             player.sendMessage(message);
             event.setCancelled(true);
